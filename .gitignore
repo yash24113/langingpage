@@ -1,0 +1,4 @@
+.vercel
+
+# Ignore environment config file
+config.env
