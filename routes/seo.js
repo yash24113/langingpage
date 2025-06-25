@@ -5,6 +5,9 @@ const SEO = require("../models/SEO");
 // Create SEO (dynamic fields supported)
 router.post("/", async (req, res) => {
   try {
+    if (req.body.customMeta && typeof req.body.customMeta !== 'object') {
+      return res.status(400).json({ message: "customMeta must be an object" });
+    }
     const seo = new SEO(req.body); // All fields in req.body will be saved
     await seo.save();
     res.status(201).json(seo);
@@ -37,6 +40,9 @@ router.get("/:id", async (req, res) => {
 // Update SEO (dynamic fields supported)
 router.put("/:id", async (req, res) => {
   try {
+    if (req.body.customMeta && typeof req.body.customMeta !== 'object') {
+      return res.status(400).json({ message: "customMeta must be an object" });
+    }
     // Remove runValidators to allow any field (not just those in schema)
     const seo = await SEO.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

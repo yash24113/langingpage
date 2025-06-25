@@ -11,6 +11,7 @@ const locationRoutes = require("./routes/location");
 const productRoutes = require("./routes/product");
 const seoRoutes = require("./routes/seo");
 const inquiryRoutes = require("./routes/inquiry");
+const seoCustomFieldsRoutes = require("./routes/seo-custom-fields");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api/locations", locationRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/seos", seoRoutes);
 app.use("/api/inquiries", inquiryRoutes);
+app.use("/api/seo-custom-fields", seoCustomFieldsRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {
