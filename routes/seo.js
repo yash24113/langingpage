@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const SEO = require("../models/SEO");
 
-// Create SEO
+// Create SEO (dynamic fields supported)
 router.post("/", async (req, res) => {
   try {
-    const seo = new SEO(req.body);
+    const seo = new SEO(req.body); // All fields in req.body will be saved
     await seo.save();
     res.status(201).json(seo);
   } catch (err) {
@@ -34,12 +34,13 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Update SEO
+// Update SEO (dynamic fields supported)
 router.put("/:id", async (req, res) => {
   try {
+    // Remove runValidators to allow any field (not just those in schema)
     const seo = await SEO.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true,
+      // runValidators: true, // <-- Remove or comment out for dynamic fields
     });
     if (!seo) return res.status(404).json({ message: "SEO not found" });
     res.json(seo);

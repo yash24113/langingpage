@@ -48,7 +48,7 @@ const SEOSchema = new mongoose.Schema(
     rating_count: { type: Number },
     publishedAt: { type: Date },
   },
-  { timestamps: true }
+  { timestamps: true, strict: false } // <-- This line changed
 );
 
 module.exports = mongoose.model("SEO", SEOSchema);
