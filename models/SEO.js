@@ -47,8 +47,10 @@ const SEOSchema = new mongoose.Schema(
     rating_value: { type: Number },
     rating_count: { type: Number },
     publishedAt: { type: Date },
+    // --- Add this line for custom fields ---
+    seo_custom_fields: { type: Array, default: [] }
   },
-  { timestamps: true, strict: false } // <-- This line changed
+  { timestamps: true, strict: false }
 );
 
 module.exports = mongoose.model("SEO", SEOSchema);
