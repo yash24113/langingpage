@@ -3,7 +3,7 @@ const router = express.Router();
 const SEOCustomField = require("../models/SEOCustomField");
 
 // Add a new custom field
-router.post("/seo-custom-fields", async (req, res) => {
+router.post("/add-seo-custom-fields", async (req, res) => {
   try {
     const { name, value } = req.body;
     if (!name) {
