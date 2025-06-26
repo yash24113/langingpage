@@ -3,20 +3,23 @@ const router = express.Router();
 const SEOCustomField = require("../models/SEOCustomField");
 
 // Add a new custom field
-router.post("/add-seo-custom-fields", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const { name, value } = req.body;
-    if (!name) {
-      return res.status(400).json({ message: "Name is required" });
+    const { name, type, dropdownSource } = req.body;
+    if (!name || !type) {
+      return res.status(400).json({ message: "Name and type are required" });
     }
-    const customField = new SEOCustomField({ name, value });
+    const customField = new SEOCustomField({
+      name,
+      type,
+      dropdownSource: type === 'dropdown' ? dropdownSource : undefined,
+    });
     await customField.save();
     res.status(201).json(customField);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
-
 // List all custom fields
 router.get("/", async (req, res) => {
   try {
